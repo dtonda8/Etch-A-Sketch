@@ -1,0 +1,58 @@
+* {
+    font-family: 'Roboto Mono', monospace;
+    color: #007acc;
+}
+
+#header {
+    font-size: 36px; 
+    padding: 16px;
+}
+
+body {
+    padding: 0px 0px;
+    margin: 0px 0px;
+    text-align: center;
+    background-color: #393939;
+}
+
+#sketchpad-container {
+    display: inline-block;
+    border: 4px solid black;
+    width: 480px;
+    height: 480px;
+}
+
+#options-1,
+#options-2 {
+    display: inline-block;
+}
+
+.box {
+    display: inline-block;
+    border: 1px solid black;
+    width: 28px;
+    height: 28px;
+    background-color: #888787;
+}
+
+.colored {
+    background-color: black;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #555555;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+img {
+    width: 20px;
+    height: auto;
+    display: flex;
+}
