@@ -41,7 +41,6 @@ body {
 
 .box {
     display: inline-block;
-    box-sizing: border-box;
     width: 30px;
     height: 30px;
     background-color: #888787;

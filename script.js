@@ -1,8 +1,16 @@
 const sketchpadDiv = document.querySelector('#sketchpad-container');
 const sketchpadLength = sketchpadDiv.clientWidth;
+let colorTrigger = false;
+
+sketchpadDiv.addEventListener('mousedown', () => {      
+    colorTrigger = true;  
+});   
+
+sketchpadDiv.addEventListener('mouseup', () => {      
+    colorTrigger = false;  
+});
 
 function createSketchPad(length = 16) {
-    // Clear board if any existing elements
     sketchpadDiv.textContent = '';
 
     const boxWidth = sketchpadLength/length;
@@ -16,17 +24,33 @@ function createSketchPad(length = 16) {
             boxDiv.classList.add('box')
             boxDiv.style.width = `${boxWidth}px`;
             boxDiv.style.height = `${boxWidth}px`;
-
-            boxDiv.addEventListener('mouseover', () => {
-                boxDiv.classList.add('colored')
+            
+            boxDiv.addEventListener('mousedown', () => {
+                boxDiv.classList.add('colored')            
+            })  
+            
+            boxDiv.addEventListener('mousemove', () => {
+                if (colorTrigger)
+                boxDiv.classList.add('colored')              
             })
-    
+
             rowDiv.appendChild(boxDiv)
     
         sketchpadDiv.appendChild(rowDiv);
         }
     }
 }
+
+function changeColor(e) {
+    if (e.type === 'mouseover' && !mouseDown) return
+    e.target.classList.add('colored')
+  }
+
+
+let mouseDown = false
+document.body.onmousedown = () => (mouseDown = true)
+document.body.onmouseup = () => (mouseDown = false)
+
 createSketchPad(16);
 
 const eraseBtn = document.querySelector('#erase-btn');
@@ -41,18 +65,19 @@ function clearPad() {
 
 eraseBtn.addEventListener('click', clearPad)
 
-// Slider for Etch A Sketch size
 const sizeDisplayDiv = document.querySelector('#current-size');
 const sizeSlider = document.querySelector('#size-slider');
 
 sizeSlider.addEventListener('input', () => {
-    // Update Size Display
+    clearPad();
+
     const size = sizeSlider.value;
     const string = `${size} × ${size}`;
 
     sizeDisplayDiv.textContent = string;
+})
 
-    // Update board
-    clearPad();
+sizeSlider.addEventListener('change', () => {
+    const size = sizeSlider.value;
     createSketchPad(size)
 })
