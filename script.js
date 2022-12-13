@@ -17,6 +17,7 @@ function createSketchPad(length = 16) {
 
     for (let i = 0; i < length; i++) {
         const rowDiv = document.createElement('div');
+        rowDiv.classList.add('row')
         rowDiv.style.fontSize = '0';
         
         for (let j = 0; j < length; j++) {
@@ -24,14 +25,19 @@ function createSketchPad(length = 16) {
             boxDiv.classList.add('box')
             boxDiv.style.width = `${boxWidth}px`;
             boxDiv.style.height = `${boxWidth}px`;
+            boxDiv.classList.add('box-hover')
             
-            boxDiv.addEventListener('mousedown', () => {
-                boxDiv.classList.add('colored')            
+            boxDiv.addEventListener('mousedown', (e) => {
+                changeColor(e)
+                console.log(colorTrigger)
             })  
             
-            boxDiv.addEventListener('mousemove', () => {
-                if (colorTrigger)
-                boxDiv.classList.add('colored')              
+            boxDiv.addEventListener('mouseover', (e) => {
+                if (colorTrigger) {
+                    console.log('moving too')
+                    changeColor(e)
+                    }
+                console.log(colorTrigger)
             })
 
             rowDiv.appendChild(boxDiv)
@@ -42,16 +48,11 @@ function createSketchPad(length = 16) {
 }
 
 function changeColor(e) {
-    if (e.type === 'mouseover' && !mouseDown) return
-    e.target.classList.add('colored')
-  }
+    e.target.classList.add('colored');
+    e.target.classList.remove('box-hover');
+}
 
-
-let mouseDown = false
-document.body.onmousedown = () => (mouseDown = true)
-document.body.onmouseup = () => (mouseDown = false)
-
-createSketchPad(16);
+createSketchPad(26);
 
 const eraseBtn = document.querySelector('#erase-btn');
 const boxes = document.querySelectorAll('.box')
@@ -60,6 +61,7 @@ function clearPad() {
     const boxes = document.querySelectorAll('.box')
     boxes.forEach(box => {
         box.classList.remove('colored');
+        box.classList.add('box-hover');
     })
 }
 
