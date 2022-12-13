@@ -23,7 +23,14 @@ const boxes = document.querySelectorAll('.box')
 eraseBtn.addEventListener('click', () => {
     boxes.forEach(box => {
         box.classList.remove('colored');
-        console.log(typeof box);
     })
-    
+})
+
+// Slider for Etch A Sketch size
+const sizeDisplayDiv = document.querySelector('#current-size');
+const sizeSlider = document.querySelector('#size-slider');
+
+sizeSlider.addEventListener('input', () => {
+    const string = `${sizeSlider.value} × ${sizeSlider.value}`;
+    sizeDisplayDiv.textContent = string;
 })
