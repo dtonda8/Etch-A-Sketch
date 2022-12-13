@@ -41,9 +41,9 @@ body {
 
 .box {
     display: inline-block;
-    border: 1px solid black;
-    width: 28px;
-    height: 28px;
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
     background-color: #888787;
 }
 
